@@ -6,7 +6,7 @@
 /*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 02:11:21 by hamzabillah       #+#    #+#             */
-/*   Updated: 2025/05/13 16:27:41 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/05/14 17:48:21 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ void	log_state(t_philo *philo, char *state)
 {
 	long	timestamp;
 	t_data	*data;
-	char	*color;
 
-	color = RESET;
 	data = philo->data;
 	pthread_mutex_lock(&data->log_mutex);
 	if (strcmp(state, "died") == 0)
@@ -54,7 +52,6 @@ void	log_state(t_philo *philo, char *state)
 			return ;
 		}
 		set_stop(data);
-		color = RED;
 	}
 	else if (check_stop(data))
 	{
@@ -63,6 +60,7 @@ void	log_state(t_philo *philo, char *state)
 	}
 	timestamp = get_time() - data->start_time;
 	printf("%ld %d %s\n", timestamp, philo->id, state);
+	fflush(stdout); // Add this line
 	pthread_mutex_unlock(&data->log_mutex);
 }
 
