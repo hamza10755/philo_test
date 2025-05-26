@@ -6,7 +6,7 @@
 /*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 02:11:21 by hamzabillah       #+#    #+#             */
-/*   Updated: 2025/05/14 17:48:21 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/05/26 16:00:29 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ long	get_time(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-void	log_state(t_philo *philo, char *state)
+int	log_state(t_philo *philo, char *state)
 {
 	long	timestamp;
 	t_data	*data;
@@ -49,19 +49,20 @@ void	log_state(t_philo *philo, char *state)
 		if (check_stop(data))
 		{
 			pthread_mutex_unlock(&data->log_mutex);
-			return ;
+			return (1);
 		}
 		set_stop(data);
 	}
 	else if (check_stop(data))
 	{
 		pthread_mutex_unlock(&data->log_mutex);
-		return ;
+		return (1);
 	}
 	timestamp = get_time() - data->start_time;
 	printf("%ld %d %s\n", timestamp, philo->id, state);
-	fflush(stdout); // Add this line
+	fflush(stdout);
 	pthread_mutex_unlock(&data->log_mutex);
+	return (1);
 }
 
 int	ft_atoi(const char *str)

@@ -6,7 +6,7 @@
 /*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 02:10:10 by hamzabillah       #+#    #+#             */
-/*   Updated: 2025/05/14 16:35:22 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/05/26 16:08:12 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void					cleanup(t_data *data);
 void					*philo_routine(void *arg);
 void					*monitor_routine(void *arg);
 long					get_time(void);
-void					log_state(t_philo *philo, char *state);
+int						log_state(t_philo *philo, char *state);
 void					left_or_right(t_philo *philo);
 int						ft_atoi(const char *str);
 int						check_stop(t_data *data);
@@ -65,5 +65,6 @@ void					check_philo_death(t_data *data, int i, long now);
 void					check_routine(t_philo *philo, t_data *data);
 void					check_left_right(t_philo *philo);
 void					precise_sleep(long usec);
+void					check_philo(t_data *data, int i, int *finished_eating);
 
 #endif
